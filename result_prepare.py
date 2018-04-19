@@ -7,7 +7,7 @@ import os
 import numpy as np
 import pandas as pd
 
-file = os.getcwd() + '/predict/prediction.txt'
+file = os.getcwd() + '/predict/prediction5.txt'
 save_file = os.getcwd() + '/updata/'
 if os.path.exists(save_file) is False:
     os.makedirs(save_file)
@@ -20,4 +20,4 @@ for i, index in enumerate(df_test.index):
     df_test.loc[index, :] = prediction[i, :]
 
 print(df_test)
-df_test.to_csv(save_file+'updata_1.csv', sep=',', header=None)
+df_test.to_csv(save_file+'updata5.csv', sep=',', header=None)

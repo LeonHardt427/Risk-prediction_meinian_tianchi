@@ -5,6 +5,7 @@
 
 import os
 import pandas as pd
+# 手动选择特征作为基本特征并将数据粘连
 
 path = os.getcwd() + "/data_std/"
 
