@@ -16,8 +16,8 @@ save_path = os.getcwd() + '/predict/'
 if os.path.exists(save_path) is False:
     os.makedirs(save_path)
 
-x_train = np.loadtxt(path+'x_train.txt', delimiter=',', dtype='float')
-y_train = np.loadtxt(path+'y_train.txt', delimiter=',', dtype='float')
+x_train = np.loadtxt(path+'x_train_mean.txt', delimiter=',', dtype='float')
+y_train = np.loadtxt(path+'y_train_mean.txt', delimiter=',', dtype='float')
 y_train_num = y_train[:, 2]
 
 params_grid = {
