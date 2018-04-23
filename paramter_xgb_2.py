@@ -17,27 +17,29 @@ save_path = os.getcwd() + '/predict/'
 if os.path.exists(save_path) is False:
     os.makedirs(save_path)
 
-x_train = np.loadtxt(path+'x_train_mean.txt', delimiter=',', dtype='float')
-y_train = np.loadtxt(path+'y_train_mean.txt', delimiter=',', dtype='float')
-y_train_num = y_train[:, 4]
+x_train = np.loadtxt(path+'x_train_mean_new1.txt', delimiter=',', dtype='float')
+y_train = np.loadtxt(path+'y_train_mean_new1.txt', delimiter=',', dtype='float')
+for i in range(5):
+    y_train_num = y_train[:, i]
 
-params_grid = {
-    'max_depth': range(6, 13, 2),
-    'n_estimators': range(10, 211, 40),
-    'learning_rate': np.linspace(1e-16, 1, 8)
-}
-params_fixed = {
-    'objective': 'reg:linear',
-    'silent': True
-}
-bst_grid = GridSearchCV(
-    estimator=xbg.XGBRegressor(**params_fixed, random_state=1),
-    param_grid=params_grid,
-    cv=5,
-    scoring='neg_mean_squared_error'
-)
+    params_grid = {
+        'max_depth': range(6, 15, 2),
+        'n_estimators': range(10, 300, 50),
+        'learning_rate': [0.0005, 0.001, 0.01, 0.1, 0.5, 0.8, 1]
+    }
+    params_fixed = {
+        'objective': 'reg:linear',
+        'silent': True
+    }
+    bst_grid = GridSearchCV(
+        estimator=xbg.XGBRegressor(**params_fixed, random_state=1),
+        param_grid=params_grid,
+        cv=5,
+        scoring='neg_mean_squared_log_error'
+    )
 
-bst_grid.fit(x_train, y_train_num)
+    bst_grid.fit(x_train, y_train_num)
+    print(i)
+    print("the best parameter is :")
+    print(bst_grid.best_params_.items())
 
-print("the bset parameter 1 is :")
-print(bst_grid.best_params_.items())
