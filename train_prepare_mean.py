@@ -12,8 +12,8 @@ import xgboost as xgb
 
 path = os.getcwd() + '/data_use/'
 
-df_train = pd.read_csv(path + 'train_use.csv', delimiter=',', encoding='gbk', index_col=0)
-df_test = pd.read_csv(path + 'test_use.csv', delimiter=',', encoding='gbk', index_col=0)
+df_train = pd.read_csv(path + 'train_use_new.csv', delimiter=',', encoding='gbk', index_col=0)
+df_test = pd.read_csv(path + 'test_use_new.csv', delimiter=',', encoding='gbk', index_col=0)
 df_y_trains = pd.read_csv(os.getcwd() + '/data_orginal/meinian_round1_train_20180408.csv', delimiter=',',
                           encoding='gbk', index_col=0)
 # NaN -> 0.0
@@ -44,7 +44,7 @@ for mean_num, cols in enumerate(df_train.columns):
             df_train.loc[ind, cols] = temp
 
 x_train = df_train.loc[:, :].values
-np.savetxt(save_path + 'x_train_mean.txt', x_train, delimiter=',')
+np.savetxt(save_path + 'x_train_mean_new.txt', x_train, delimiter=',')
 
 # ----------------------------------------------------------------------------------------
 # y_train_ str to float:
@@ -58,7 +58,7 @@ for i, indexs in enumerate(df_y_trains.index):
             df_y_trains.loc[indexs, cols] = 0
 
 y_train = df_y_trains.loc[:, :].values
-np.savetxt(save_path + 'y_train_mean.txt', y_train, delimiter=',')
+np.savetxt(save_path + 'y_train_mean_new.txt', y_train, delimiter=',')
 
 # -----------------------------------------------------------------------------------------
 # x_test_ str to float:
@@ -79,7 +79,7 @@ for mean_nu, cols in enumerate(df_test.columns):
             df_test.loc[ind, cols] = temp
 
 x_test = df_test.loc[:, :].values
-np.savetxt(save_path + 'x_test_mean.txt', x_test, delimiter=',')
+np.savetxt(save_path + 'x_test_mean_new.txt', x_test, delimiter=',')
 
 # print(x_train)
 # print(y_train)

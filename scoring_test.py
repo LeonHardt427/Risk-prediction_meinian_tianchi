@@ -31,5 +31,5 @@ if __name__ == '__main__':
     path = os.getcwd() + '/updata/'
     print(path)
     true = pd.read_csv(path+'updata_1.csv', index_col=0, delimiter=',', header=None)
-    pred = pd.read_csv(path+'updata_3.csv', index_col=0, delimiter=',', header=None)
+    pred = pd.read_csv(path+'updata_mean7.csv', index_col=0, delimiter=',', header=None)
     calc_logloss(true, pred)

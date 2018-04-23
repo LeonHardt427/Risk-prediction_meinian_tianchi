@@ -7,7 +7,7 @@ import os
 import numpy as np
 import pandas as pd
 
-file = os.getcwd() + '/predict/prediction_mean1.txt'
+file = os.getcwd() + '/predict/prediction_mean7.txt'
 save_file = os.getcwd() + '/updata/'
 if os.path.exists(save_file) is False:
     os.makedirs(save_file)
@@ -19,5 +19,8 @@ df_test = pd.read_csv(os.getcwd()+'/data_orginal/[new] meinian_round1_test_a_201
 for i, index in enumerate(df_test.index):
     df_test.loc[index, :] = prediction[i, :]
 
+# for index in df_test.index:
+#     if df_test.loc[index, "舒张压"] > 140 or df_test.loc[index, "舒张压"] < 39:
+#         df_test.loc[index, "舒张压"] = 60
 print(df_test)
-df_test.to_csv(save_file+'updata_mean1.csv', sep=',', header=None)
+df_test.to_csv(save_file+'updata_mean7.csv', sep=',', header=None)
