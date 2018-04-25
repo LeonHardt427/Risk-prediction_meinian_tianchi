@@ -13,15 +13,20 @@ import xgboost as xgb
 
 path = os.getcwd()+'/data_use/'
 
-df_train = pd.read_csv(path+'train_use.csv', delimiter=',', encoding='gbk', index_col=0)
-df_test = pd.read_csv(path+'test_use.csv', delimiter=',', encoding='gbk', index_col=0)
+df_train = pd.read_csv(path+'train_use_new.csv', delimiter=',', encoding='gbk', index_col=0)
+df_test = pd.read_csv(path+'test_use_new.csv', delimiter=',', encoding='gbk', index_col=0)
 df_y_trains = pd.read_csv(os.getcwd()+'/data_orginal/meinian_round1_train_20180408.csv', delimiter=',',
                           encoding='gbk', index_col=0)
 # NaN -> 0.0
 df_train = df_train.fillna(0.0)
 df_test = df_test.fillna(0.0)
-df_error = pd.read_csv(os.getcwd() + '/data_orginal/error_train.csv', delimiter=',', encoding="gbk")
+df_error = pd.read_csv(os.getcwd() + '/data_orginal/error_train1.csv', delimiter=',', encoding="gbk")
 error = []
+
+save_path = os.getcwd() + '/data_app/'
+if os.path.exists(save_path) is False:
+    os.makedirs(save_path)
+
 
 for ind in df_error.index:
     error.append(df_error.iloc[ind, 0])
@@ -33,9 +38,6 @@ print(type(error))
 # error = error.reshape(-1, 1)
 # print(error)
 
-save_path = os.getcwd() + '/data_app/'
-if os.path.exists(save_path) is False:
-    os.makedirs(save_path)
 
 # ---------------------------------------------------------------
 # x_train_ str to float:
@@ -51,7 +53,7 @@ for i, indexs in enumerate(df_train.index):
 
 x_train = df_train.loc[:, :].values
 
-np.savetxt(save_path+'x_train_mean1.txt', x_train, delimiter=',')
+np.savetxt(save_path+'x_train_mean_new2.txt', x_train, delimiter=',')
 
 
 # ----------------------------------------------------------------------------------------
@@ -68,7 +70,7 @@ for i, indexs in enumerate(df_y_trains.index):
 
 y_train = df_y_trains.loc[:, :].values
 
-np.savetxt(save_path+'y_train_mean1.txt', y_train, delimiter=',')
+np.savetxt(save_path+'y_train_mean_new2.txt', y_train, delimiter=',')
 
 # -----------------------------------------------------------------------------------------
 # x_test_ str to float:
@@ -83,7 +85,7 @@ for i, indexs in enumerate(df_test.index):
 
 
 x_test = df_test.loc[:, :].values
-np.savetxt(save_path+'x_test_mean1.txt', x_test, delimiter=',')
+np.savetxt(save_path+'x_test_mean_new2.txt', x_test, delimiter=',')
 
 # print(x_train)
 # print(y_train)

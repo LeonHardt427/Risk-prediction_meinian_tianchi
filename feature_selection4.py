@@ -16,7 +16,9 @@ df2 = pd.read_csv(path+"data_tidy2.csv", delimiter=',', index_col=0, encoding="g
 col1 = ['2403', '2404', '2405', '2420', '3601', '0102', '0539', '0121', 'A705', '4001', '0409', '0424', '1321',
         '1322', '2406']
 col2 = ['100005', '100007', '31', '314', '315', '316', '317', '319', '32', '320', '33', '34', '37', '38', '39', '1840',
-        '3193', '3399', '1850', '10004', '190', '191', '2333', '2372', '10003', '1115', '1117',
+        '3193',
+        # '3399',
+        '1850', '10004', '190', '191', '2333', '2372', '10003', '1115', '1117',
         '1814', '1815', '183', '1845', '192', '193', '2174', '100006']
 df1_1 = df1.loc[:, col1]
 print(df1_1)
@@ -37,7 +39,7 @@ for ind in df1_1.index:
         if "减少" in temp or "降低" in temp :
             df1_1.loc[ind, '3601'] = 0.3
         else:
-            df1_1.loc[ind, '3601'] = 0.0
+            df1_1.loc[ind, '3601'] = 0.1
 
 # col = 102
 for ind in df1_1.index:
@@ -45,13 +47,13 @@ for ind in df1_1.index:
     print(temp)
     if "脂肪" in temp:
         if "重" in temp:
-            df1_1.loc[ind, '0102'] = 1
+            df1_1.loc[ind, '0102'] = 4
         elif "中" in temp:
-            df1_1.loc[ind, '0102'] = 0.7
+            df1_1.loc[ind, '0102'] = 3
         elif "轻" in temp:
-            df1_1.loc[ind, '0102'] = 0.3
+            df1_1.loc[ind, '0102'] = 2
         else:
-            df1_1.loc[ind, '0102'] = 0.0
+            df1_1.loc[ind, '0102'] = 1
     else:
             df1_1.loc[ind, '0102'] = 0.0
 
@@ -62,6 +64,8 @@ for ind in df1_1.index:
     print(temp)
     if temp != 0:
         df1_1.loc[ind, '0539'] = 1
+    else:
+        df1_1.loc[ind, '0539'] = 0.1
 
 # col = 121
 for ind in df1_1.index:
@@ -75,21 +79,27 @@ for ind in df1_1.index:
 for ind in df1_1.index:
     temp = df1_1.loc[ind, 'A705']
     if "脂肪" in str(temp):
+        df1_1.loc[ind, 'A705'] = 2
+    elif "硬" in str(temp):
         df1_1.loc[ind, 'A705'] = 1
     else:
-        df1_1.loc[ind, 'A705'] = 0
+        df1_1.loc[ind, 'A705'] = 0.1
 
 # col = 4001
 for ind in df1_1.index:
     temp = df1_1.loc[ind, '4001']
     if "重度" in str(temp):
-        df1_1.loc[ind, '4001'] = 1
+        df1_1.loc[ind, '4001'] = 4
     elif "中度" in str(temp):
-        df1_1.loc[ind, '4001'] = 0.7
+        df1_1.loc[ind, '4001'] = 3
     elif "轻度" in str(temp):
-        df1_1.loc[ind, '4001'] = 0.3
+        df1_1.loc[ind, '4001'] = 2
+    elif "正常" in str(temp):
+        df1_1.loc[ind, '4001'] = 1
+    elif "良好" in str(temp):
+        df1_1.loc[ind, '4001'] = 1
     else:
-        df1_1.loc[ind, '4001'] = 0.0
+        df1_1.loc[ind, '4001'] = 0.1
 
 # col = 409
 for ind in df1_1.index:
@@ -101,7 +111,7 @@ for ind in df1_1.index:
     elif "脂肪肝" in str(temp):
         df1_1.loc[ind, '0409'] = 3
     else:
-        df1_1.loc[ind, '0409'] = 0.0
+        df1_1.loc[ind, '0409'] = 0.1
 
 # col = 424
 for ind in df1_1.index:
@@ -111,7 +121,7 @@ for ind in df1_1.index:
     elif "次" in str(temp):
         df1_1.loc[ind, '0424'] = 70
     else:
-        df1_1.loc[ind, '0424'] = 0.0
+        df1_1.loc[ind, '0424'] = 0.1
 
 for ind in df1_1.index:
     for cols in ['1321', '1322']:
@@ -122,12 +132,12 @@ df1_1.drop(["0121"], axis=1, inplace=True)
 
 # ------------------------------deal df2-------------------------------------------
 # col = 3399
-for ind in df2_2.index:
-    temp = df2_2.loc[ind, '3399']
-    if "淡黄色" in str(temp):
-        temp = df2_2.loc[ind, '3399'] = 1
-    else:
-        temp = df2_2.loc[ind, '3399'] = 0
+# for ind in df2_2.index:
+#     temp = df2_2.loc[ind, '3399']
+#     if "淡黄色" in str(temp):
+#         temp = df2_2.loc[ind, '3399'] = 1
+#     else:
+#         temp = df2_2.loc[ind, '3399'] = 0
 
 
 df_whole = df1_1.join(df2_2)

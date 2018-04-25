@@ -1,19 +1,30 @@
 # -*- coding: utf-8 -*-
-# @Time    : 2018/4/19 9:22
+# @Time    : 2018/4/24 19:21
 # @Author  : LeonHardt
-# @File    : train_prepare_mean.py
+# @File    : train_prepare_mean_error.py
 
 
 import os
 import numpy as np
 import pandas as pd
 
-path = os.getcwd() + '/data_use/'
+import xgboost as xgb
 
+path = os.getcwd() + '/data_use/'
+train_save = os.getcwd() + '/train_watch/'
 df_train = pd.read_csv(path + 'train_use_new.csv', delimiter=',', encoding='gbk', index_col=0)
 df_test = pd.read_csv(path + 'test_use_new.csv', delimiter=',', encoding='gbk', index_col=0)
 df_y_trains = pd.read_csv(os.getcwd() + '/data_orginal/meinian_round1_train_20180408.csv', delimiter=',',
                           encoding='gbk', index_col=0)
+
+# error
+df_error = pd.read_csv(os.getcwd() + '/data_orginal/error_train3.csv', delimiter=',', encoding="gbk", header=None)
+error = []
+for ind in df_error.index:
+    error.append(df_error.iloc[ind, 0])
+print(error)
+
+
 # NaN -> 0.0
 df_train = df_train.fillna(0.0)
 df_test = df_test.fillna(0.0)
@@ -24,6 +35,8 @@ if os.path.exists(save_path) is False:
 
 # ---------------------------------------------------------------
 # x_train_ str to float:
+
+df_train.drop(error, axis=0, inplace=True)
 
 for i, indexs in enumerate(df_train.index):
     print(i)
@@ -41,11 +54,14 @@ for mean_num, cols in enumerate(df_train.columns):
         if df_train.loc[ind, cols] == 0:
             df_train.loc[ind, cols] = temp
 
+df_train.to_csv(train_save + 'tain_feature_error3.csv', sep=',')
 x_train = df_train.loc[:, :].values
-np.savetxt(save_path + 'x_train_mean_new2.txt', x_train, delimiter=',')
+np.savetxt(save_path + 'x_train_mean_error3.txt', x_train, delimiter=',')
 
 # ----------------------------------------------------------------------------------------
 # y_train_ str to float:
+
+df_y_trains.drop(error, axis=0, inplace=True)
 
 for i, indexs in enumerate(df_y_trains.index):
     print(i)
@@ -55,8 +71,9 @@ for i, indexs in enumerate(df_y_trains.index):
         except ValueError:
             df_y_trains.loc[indexs, cols] = 0
 
+df_y_trains.to_csv(train_save + 'tain_label_error3.csv', sep=',')
 y_train = df_y_trains.loc[:, :].values
-np.savetxt(save_path + 'y_train_mean_new2.txt', y_train, delimiter=',')
+np.savetxt(save_path + 'y_train_mean_error3.txt', y_train, delimiter=',')
 
 # -----------------------------------------------------------------------------------------
 # x_test_ str to float:
@@ -77,7 +94,7 @@ for mean_nu, cols in enumerate(df_test.columns):
             df_test.loc[ind, cols] = temp
 
 x_test = df_test.loc[:, :].values
-np.savetxt(save_path + 'x_test_mean_new2.txt', x_test, delimiter=',')
+np.savetxt(save_path + 'x_test_mean_error3.txt', x_test, delimiter=',')
 
-# print(x_train)
-# print(y_train)
+print(x_train)
+print(y_train)

@@ -6,11 +6,20 @@
 import os
 import pandas as pd
 from math import log1p, pow
+import math
+from sklearn.metrics import mean_squared_log_error
 # 计算误差损失（评估分数）
 
 
+def evalerror(preds, dtrain):       # written by myself
+    labels = dtrain.get_label()
+    # return a pair metric_name, result
+    # since preds are margin(before logistic transformation, cutoff at 0)
+    return 'error', math.sqrt(mean_squared_log_error(preds,labels))
+
+
 def calc_logloss(true_df, pred_df):
-    new = 3
+    new = 5
     loss_sum = 0
     rows = true_df.shape[0]
     for c in true_df.columns:
@@ -30,6 +39,6 @@ def calc_logloss(true_df, pred_df):
 if __name__ == '__main__':
     path = os.getcwd() + '/updata/'
     print(path)
-    true = pd.read_csv(path+'updata_1.csv', index_col=0, delimiter=',', header=None)
-    pred = pd.read_csv(path+'updata_mean7.csv', index_col=0, delimiter=',', header=None)
+    true = pd.read_csv(path+'updata_mean_error31.csv', index_col=0, delimiter=',', header=None)
+    pred = pd.read_csv(path+'updata_nan_error33.csv', index_col=0, delimiter=',', header=None)
     calc_logloss(true, pred)
