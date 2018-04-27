@@ -17,9 +17,10 @@ save_path = os.getcwd() + '/predict/'
 if os.path.exists(save_path) is False:
     os.makedirs(save_path)
 
-x_train = np.loadtxt(path+'x_train_mean_nan_error3.txt', delimiter=',', dtype='float')
-y_train = np.loadtxt(path+'y_train_mean_nan_error3.txt', delimiter=',', dtype='float')
-x_test = np.loadtxt(path+'x_test_mean_nan_error3.txt', delimiter=',', dtype='float')
+x_train = np.loadtxt(path+'x_train_nan_error3_change.txt', delimiter=',', dtype='float')
+y_train = np.loadtxt(path+'y_train_nan_error3_change.txt', delimiter=',', dtype='float')
+x_test = np.loadtxt(path+'x_test_nan_error3_change.txt', delimiter=',', dtype='float')
+
 
 # xlf = xgb.XGBRegressor(max_depth=10, learning_rate=0.1, silent=True, objective='reg:gamma',
 #                       nthread=-1, gamma=0, min_child_weight=1, max_delta_step=0, subsample=0.85, colsample_bytree=0.7,
@@ -60,4 +61,4 @@ pred5 = xlf4.predict(x_test)
 prediction = np.vstack((prediction, pred5))
 
 prediction = prediction.T
-np.savetxt(save_path+'prediction_nan_error35.txt', prediction, fmt='%.3e',  delimiter=',')
+np.savetxt(save_path+'prediction_xgb_nan_change_error35.txt', prediction, fmt='%.3e',  delimiter=',')

@@ -12,8 +12,8 @@ import xgboost as xgb
 path = os.getcwd() + '/data_use/'
 train_save = os.getcwd() + '/train_watch/'
 
-df_train = pd.read_csv(path + 'train_use_nan.csv', delimiter=',', encoding='gbk', index_col=0)
-df_test = pd.read_csv(path + 'test_use_nan.csv', delimiter=',', encoding='gbk', index_col=0)
+df_train = pd.read_csv(path + 'train_use_nan_change.csv', delimiter=',', encoding='gbk', index_col=0)
+df_test = pd.read_csv(path + 'test_use_nan_change.csv', delimiter=',', encoding='gbk', index_col=0)
 
 df_y_trains = pd.read_csv(os.getcwd() + '/data_orginal/meinian_round1_train_20180408.csv', delimiter=',',
                           encoding='gbk', index_col=0)
@@ -43,9 +43,9 @@ for i, indexs in enumerate(df_train.index):
             df_train.loc[indexs, cols] = np.nan
 
 
-df_train.to_csv(train_save + 'tain_feature_nan_error3.csv', sep=',')
+df_train.to_csv(train_save + 'tain_feature_nan_error3_change.csv', sep=',')
 x_train = df_train.loc[:, :].values
-np.savetxt(save_path + 'x_train_mean_nan_error3.txt', x_train, delimiter=',')
+np.savetxt(save_path + 'x_train_nan_error3_change.txt', x_train, delimiter=',')
 
 # ----------------------------------------------------------------------------------------
 # y_train_ str to float:
@@ -60,9 +60,9 @@ for i, indexs in enumerate(df_y_trains.index):
         except ValueError:
             df_y_trains.loc[indexs, cols] = np.nan
 
-df_y_trains.to_csv(train_save + 'tain_label_nan_error3.csv', sep=',')
+df_y_trains.to_csv(train_save + 'tain_label_nan_error3_change.csv', sep=',')
 y_train = df_y_trains.loc[:, :].values
-np.savetxt(save_path + 'y_train_mean_nan_error3.txt', y_train, delimiter=',')
+np.savetxt(save_path + 'y_train_nan_error3_change.txt', y_train, delimiter=',')
 
 # -----------------------------------------------------------------------------------------
 # x_test_ str to float:
@@ -76,7 +76,7 @@ for i, indexs in enumerate(df_test.index):
             df_test.loc[indexs, cols] = np.nan
 
 x_test = df_test.loc[:, :].values
-np.savetxt(save_path + 'x_test_mean_nan_error3.txt', x_test, delimiter=',')
+np.savetxt(save_path + 'x_test_nan_error3_change.txt', x_test, delimiter=',')
 
 print(x_train)
 print(y_train)

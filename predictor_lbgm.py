@@ -18,9 +18,9 @@ save_path = os.getcwd() + '/predict/'
 if os.path.exists(save_path) is False:
     os.makedirs(save_path)
 
-x_train = np.loadtxt(path+'x_train_mean_nan_error3.txt', delimiter=',', dtype='float')
-y_train = np.loadtxt(path+'y_train_mean_nan_error3.txt', delimiter=',', dtype='float')
-x_test = np.loadtxt(path+'x_test_mean_nan_error3.txt', delimiter=',', dtype='float')
+x_train = np.loadtxt(path+'x_train_nan_error3_change.txt', delimiter=',', dtype='float')
+y_train = np.loadtxt(path+'y_train_nan_error3_change.txt', delimiter=',', dtype='float')
+x_test = np.loadtxt(path+'x_test_nan_error3_change.txt', delimiter=',', dtype='float')
 
 
 print('Start training...')
@@ -56,5 +56,5 @@ pred4 = gbm4.predict(x_test)
 prediction = np.vstack((prediction, pred4))
 
 prediction = prediction.T
-np.savetxt(save_path+'prediction_gbm_nan_error32.txt', prediction, fmt='%.3e',  delimiter=',')
+np.savetxt(save_path+'prediction_gbm_nan_change_error31.txt', prediction, fmt='%.3e',  delimiter=',')
 
