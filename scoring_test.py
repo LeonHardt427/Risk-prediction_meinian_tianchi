@@ -39,6 +39,6 @@ def calc_logloss(true_df, pred_df):
 if __name__ == '__main__':
     path = os.getcwd() + '/updata/'
     print(path)
-    true = pd.read_csv(path+'updata_mean_error31.csv', index_col=0, delimiter=',', header=None)
-    pred = pd.read_csv(path+'updata_nan_error33.csv', index_col=0, delimiter=',', header=None)
+    true = pd.read_csv(path+'updata_nan_error35.csv', index_col=0, delimiter=',', header=None)
+    pred = pd.read_csv(path+'updata_gbm_nan_error32.csv', index_col=0, delimiter=',', header=None)
     calc_logloss(true, pred)
