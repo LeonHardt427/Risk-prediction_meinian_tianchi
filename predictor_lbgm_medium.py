@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# @Time    : 2018/4/26 18:49
+# @Time    : 2018/4/29 20:12
 # @Author  : LeonHardt
-# @File    : predictor_lbgm.py
+# @File    : predictor_lbgm_medium.py
 
 import os
 import lightgbm as lgb
@@ -9,7 +9,9 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import GridSearchCV
+from sklearn.preprocessing import Imputer
 from scoring_test import evalerror
+from sklearn.ensemble import RandomForestRegressor
 
 # load or create your dataset
 print('Load data...')
@@ -18,10 +20,23 @@ save_path = os.getcwd() + '/predict/'
 if os.path.exists(save_path) is False:
     os.makedirs(save_path)
 
+print('pre training...')
 x_train = np.loadtxt(path+'x_train_nan_error3_change.txt', delimiter=',', dtype='float')
 y_train = np.loadtxt(path+'y_train_nan_error3_change.txt', delimiter=',', dtype='float')
 x_test = np.loadtxt(path+'x_test_nan_error3_change.txt', delimiter=',', dtype='float')
 
+x_train_2 = np.loadtxt(path+'x_train_nan_error3_change_pred21.txt', delimiter=',', dtype='float')
+y_train_2 = np.loadtxt(path+'y_train_nan_error3_change_pred21.txt', delimiter=',', dtype='float')
+
+imp1 = Imputer(missing_values='NaN', strategy='median', axis=1)
+imp1.fit(x_train)
+x_train1 = imp1.transform(x_train)
+x_test1 = imp1.transform(x_test)
+
+imp2 = Imputer(missing_values='NaN', strategy='median', axis=1)
+imp2.fit(x_train_2)
+x_train_pred2 = imp2.transform(x_train_2)
+x_test1_pred2 = imp2.transform(x_test)
 
 print('Start training...')
 # train
@@ -37,10 +52,15 @@ gbm1.fit(x_train, y_train[:, 1], eval_metric=evalerror)
 pred1 = gbm1.predict(x_test)
 prediction = np.vstack((prediction, pred1))
 
-gbm2 = lgb.LGBMRegressor(objective='regression', num_leaves=57, learning_rate=0.05, n_estimators=183,
-                         min_child_weight=1, colsample_bytree=0.7, reg_lambda=3, reg_alpha=2)
-gbm2.fit(x_train, y_train[:, 2], eval_metric=evalerror)
-pred2 = gbm2.predict(x_test)
+# gbm2 = lgb.LGBMRegressor(objective='regression', num_leaves=85, learning_rate=0.03, n_estimators=239,
+#                          min_child_weight=1, colsample_bytree=0.7, reg_lambda=3, reg_alpha=2)
+# gbm2.fit(x_train_2, y_train_2, eval_metric=evalerror)   # train 2
+# pred2 = gbm2.predict(x_test)
+# prediction = np.vstack((prediction, pred2))
+
+rf2 = RandomForestRegressor(n_estimators=400, n_jobs=-1)
+rf2.fit(x_train_pred2, y_train_2)   # train 2
+pred2 = rf2.predict(x_test1_pred2)
 prediction = np.vstack((prediction, pred2))
 
 gbm3 = lgb.LGBMRegressor(objective='regression', num_leaves=59, learning_rate=0.05, n_estimators=515,
@@ -56,5 +76,4 @@ pred4 = gbm4.predict(x_test)
 prediction = np.vstack((prediction, pred4))
 
 prediction = prediction.T
-np.savetxt(save_path+'prediction_gbm_nan_change_error32.txt', prediction, fmt='%.3e',  delimiter=',')
-
+np.savetxt(save_path+'prediction_gbm_nan_change_error3_pred21.txt', prediction, fmt='%.3e',  delimiter=',')

@@ -34,12 +34,13 @@ def calc_logloss(true_df, pred_df):
         print('%s的loss：%f' % (c, loss_item))
     loss_sum = loss_sum/5
     print('总的loss：', loss_sum)
+    return loss_sum
 
 
 if __name__ == '__main__':
     path = os.getcwd() + '/updata/'
     print(path)
-    true = pd.read_csv(path+'updata_gbm_nan_error32.csv', index_col=0, delimiter=',', header=None)
+    true = pd.read_csv(path+'updata_gbm_nan_change_error3_pred22.csv', index_col=0, delimiter=',', header=None)
     # pred = pd.read_csv(path+'updata_gbm_nan_error32.csv', index_col=0, delimiter=',', header=None)
-    pred = pd.read_csv(path + 'updata_xgb_nan_change_error35.csv', index_col=0, delimiter=',', header=None)
+    pred = pd.read_csv(path + 'updata_gbm_nan_change_error3_result_pred21.csv', index_col=0, delimiter=',', header=None)
     calc_logloss(true, pred)

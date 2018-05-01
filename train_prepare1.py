@@ -42,18 +42,18 @@ print(type(error))
 # ---------------------------------------------------------------
 # x_train_ str to float:
 
-df_train.drop(error, axis=0, inplace=True)
-for i, indexs in enumerate(df_train.index):
-    print(i)
-    for cols in df_train.columns:
-        try:
-            df_train.loc[indexs, cols] = float(df_train.loc[indexs, cols])
-        except ValueError:
-            df_train.loc[indexs, cols] = 0
-
-x_train = df_train.loc[:, :].values
-
-np.savetxt(save_path+'x_train_mean_new2.txt', x_train, delimiter=',')
+# df_train.drop(error, axis=0, inplace=True)
+# for i, indexs in enumerate(df_train.index):
+#     print(i)
+#     for cols in df_train.columns:
+#         try:
+#             df_train.loc[indexs, cols] = float(df_train.loc[indexs, cols])
+#         except ValueError:
+#             df_train.loc[indexs, cols] = 0
+#
+# x_train = df_train.loc[:, :].values
+#
+# np.savetxt(save_path+'x_train_mean_new2.txt', x_train, delimiter=',')
 
 
 # ----------------------------------------------------------------------------------------
@@ -75,17 +75,17 @@ np.savetxt(save_path+'y_train_mean_new2.txt', y_train, delimiter=',')
 # -----------------------------------------------------------------------------------------
 # x_test_ str to float:
 
-for i, indexs in enumerate(df_test.index):
-    # print(i)
-    for cols in df_test.columns:
-        try:
-            df_test.loc[indexs, cols] = float(df_test.loc[indexs, cols])
-        except ValueError:
-            df_test.loc[indexs, cols] = 0.0
-
-
-x_test = df_test.loc[:, :].values
-np.savetxt(save_path+'x_test_mean_new2.txt', x_test, delimiter=',')
+# for i, indexs in enumerate(df_test.index):
+#     # print(i)
+#     for cols in df_test.columns:
+#         try:
+#             df_test.loc[indexs, cols] = float(df_test.loc[indexs, cols])
+#         except ValueError:
+#             df_test.loc[indexs, cols] = 0.0
+#
+#
+# x_test = df_test.loc[:, :].values
+# np.savetxt(save_path+'x_test_mean_new2.txt', x_test, delimiter=',')
 
 # print(x_train)
 # print(y_train)
