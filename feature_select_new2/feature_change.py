@@ -1363,18 +1363,21 @@ for ind in df1.index:
         temp = df1.loc[ind, 'I49012']
         value = 0
         print(temp)
-        if "阴性" in temp:
-            value += 1
-        elif "未见" in temp:
-            value += 3
-        elif "查" in temp:
-            value += 6
-        elif "+" in temp or "阳性" in temp:
-            value += 15
-        else:
-            pass
-        if "+-" in temp:
-            value = 9
+        try:
+            if "阴性" in temp:
+                value += 1
+            elif "未见" in temp:
+                value += 3
+            elif "查" in temp:
+                value += 6
+            elif "+" in temp or "阳性" in temp:
+                value += 15
+            else:
+                pass
+            if "+-" in temp:
+                value = 9
+        except TypeError:
+            value = temp
         df1.loc[ind, 'I49012'] = value
 
 

@@ -16,14 +16,14 @@ if __name__=='__main__':
     if os.path.exists(save_path) is False:
         os.makedirs(save_path)
 
-    x_train = np.loadtxt(path+'x_train_nan_error3_change_pred2.txt', delimiter=',', dtype='float')
-    y_train = np.loadtxt(path+'y_train_nan_error3_change_pred2.txt', delimiter=',', dtype='float')
-    for i in [1]:
-        y_train_num = y_train[:]
+    x_train = np.loadtxt(path+'x_train_nan_error3_change3.txt', delimiter=',', dtype='float')
+    y_train = np.loadtxt(path+'y_train_nan_error3_change3.txt', delimiter=',', dtype='float')
+    for i in [4]:
+        y_train_num = y_train[:, i]
 
         params_grid = {
-            # 'n_estimators': range(230, 249, 1),
-            #  'num_leaves': range(67, 100, 2)
+            # 'n_estimators': range(400, 420, 2)
+            #  'num_leaves': range(40, 70, 3)
             'learning_rate': [0.005,  0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.1, 0.2, 0.3],
             # 'gamma': [0.3, 0.4, 0.5, 0.6, 0.7],
             # 'subsample': [0.7, 0.8, 1],
@@ -34,10 +34,10 @@ if __name__=='__main__':
         }
         params_fixed = {
             'objective': 'regression',
-            'n_estimators': 239,
+            'n_estimators': 412,
             'max_depth': -1,
-            'num_leaves': 85,
-            # 'learning_rate': 0.03,
+            'num_leaves': 58,
+            'learning_rate': 0.05,
             'min_child_weight': 1,
             'colsample_bytree': 0.7,
             'reg_alpha': 2,

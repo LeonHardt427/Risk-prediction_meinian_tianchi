@@ -35,7 +35,7 @@ if os.path.exists(save_path) is False:
 # ---------------------------------------------------------------
 # x_train_ str to float:
 
-df_train_pred2.drop(error, axis=0, inplace=True)
+# df_train_pred2.drop(error, axis=0, inplace=True)
 
 for i, indexs in enumerate(df_train_pred2.index):
     print(i)
@@ -53,7 +53,7 @@ np.savetxt(save_path + 'x_train_nan_error3_change_pred23.txt', x_train, delimite
 # ----------------------------------------------------------------------------------------
 # y_train_ str to float:
 
-df_y_trains_pred2.drop(error, axis=0, inplace=True)
+# df_y_trains_pred2.drop(error, axis=0, inplace=True)
 
 for i, indexs in enumerate(df_y_trains_pred2.index):
     print(i)

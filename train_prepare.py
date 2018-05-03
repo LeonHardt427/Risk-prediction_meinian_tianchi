@@ -7,7 +7,7 @@ import os
 import pandas as pd
 
 path = os.getcwd() + '/data_std/'
-file = path + 'data_feature_change1.csv'
+file = path + 'data_feature_change3_test.csv'
 file_usedata = os.getcwd() + '/data_use/'
 if os.path.exists(file_usedata) is False:
     os.makedirs(file_usedata)
@@ -28,5 +28,5 @@ df_whole = pd.read_csv(file, delimiter=',', encoding='gbk', index_col=0)
 df_train_use = df_whole.loc[train_id, :]
 df_test_use = df_whole.loc[test_id, :]
 
-df_train_use.to_csv(file_usedata+'train_use_nan_change.csv', sep=',')
-df_test_use.to_csv(file_usedata+'test_use_nan_change.csv', sep=',')
+df_train_use.to_csv(file_usedata+'train_use_nan_change3.csv', sep=',')
+df_test_use.to_csv(file_usedata+'test_use_nan_change3.csv', sep=',')

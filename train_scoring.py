@@ -18,11 +18,11 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 # load or create your dataset
 print('Load data...')
 path = os.getcwd() + '/data_app/'
-x_train = np.loadtxt(path+'x_train_nan_error3_change.txt', delimiter=',', dtype='float')
-y_train = np.loadtxt(path+'y_train_nan_error3_change.txt', delimiter=',', dtype='float')
+x_train = np.loadtxt(path+'x_train_nan_error3_change3.txt', delimiter=',', dtype='float')
+y_train = np.loadtxt(path+'y_train_nan_error3_change3.txt', delimiter=',', dtype='float')
 
-x_train_2 = np.loadtxt(path+'x_train_nan_error3_change_pred21.txt', delimiter=',', dtype='float')
-y_train_2 = np.loadtxt(path+'y_train_nan_error3_change_pred21.txt', delimiter=',', dtype='float')
+# x_train_2 = np.loadtxt(path+'x_train_nan_error3_change_pred21.txt', delimiter=',', dtype='float')
+# y_train_2 = np.loadtxt(path+'y_train_nan_error3_change_pred21.txt', delimiter=',', dtype='float')
 
 
 
