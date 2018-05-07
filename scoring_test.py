@@ -36,11 +36,27 @@ def calc_logloss(true_df, pred_df):
     print('总的loss：', loss_sum)
     return loss_sum
 
+def single_logloss(true_df, pred_df):
+    new = 1
+    loss_sum = 0
+    rows = true_df.shape[0]
+    for c in true_df.columns:
+        print(c)
+        true_df[c] = true_df[c].apply(lambda x: log1p(x))
+        pred_df[c] = pred_df[c].apply(lambda x: log1p(x))
+        true_df[c+new] = pred_df[c]-true_df[c]
+        true_df[c+new] = true_df[c+new].apply(lambda x: pow(x, 2))
+        loss_item = (true_df[c+new].sum())/rows
+        loss_sum += loss_item
+    loss_sum = loss_sum/1
+    print('总的loss：', loss_sum)
+    return loss_sum
+
 
 if __name__ == '__main__':
     path = os.getcwd() + '/updata/'
     print(path)
-    true = pd.read_csv(path+'updata_gbm_nan_change3_error3_pred22.csv', index_col=0, delimiter=',', header=None)
+    true = pd.read_csv(path+'/b/updata_gbm_nan_change4_error3_b1.csv', index_col=0, delimiter=',', header=None)
     # pred = pd.read_csv(path+'updata_gbm_nan_error32.csv', index_col=0, delimiter=',', header=None)
-    pred = pd.read_csv(path + 'updata_gbm_nan_change3_error31.csv', index_col=0, delimiter=',', header=None)
+    pred = pd.read_csv(path + '/b/updata_gbm_part_change4_error_b1.csv', index_col=0, delimiter=',', header=None)
     calc_logloss(true, pred)

@@ -20,7 +20,7 @@ df_y_trains = pd.read_csv(os.getcwd()+'/data_orginal/meinian_round1_train_201804
 # NaN -> 0.0
 df_train = df_train.fillna(0.0)
 df_test = df_test.fillna(0.0)
-df_error = pd.read_csv(os.getcwd() + '/data_orginal/error_train1.csv', delimiter=',', encoding="gbk")
+df_error = pd.read_csv(os.getcwd() + '/data_orginal/error_train1.csv', delimiter=',', encoding="gbk", header=None)
 error = []
 
 save_path = os.getcwd() + '/data_app/'

@@ -22,9 +22,9 @@ if __name__=='__main__':
         y_train_num = y_train[:, i]
 
         params_grid = {
-            # 'n_estimators': range(400, 420, 2)
+            'n_estimators': range(400, 420, 2)
             #  'num_leaves': range(40, 70, 3)
-            'learning_rate': [0.005,  0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.1, 0.2, 0.3],
+            # 'learning_rate': [0.005,  0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.1, 0.2, 0.3],
             # 'gamma': [0.3, 0.4, 0.5, 0.6, 0.7],
             # 'subsample': [0.7, 0.8, 1],
             # "min_child_weight": [1, 2, 3, 4, 5],
@@ -34,9 +34,9 @@ if __name__=='__main__':
         }
         params_fixed = {
             'objective': 'regression',
-            'n_estimators': 412,
+            # 'n_estimators': 412,
             'max_depth': -1,
-            'num_leaves': 58,
+            # 'num_leaves': 58,
             'learning_rate': 0.05,
             'min_child_weight': 1,
             'colsample_bytree': 0.7,
