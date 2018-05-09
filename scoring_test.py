@@ -56,7 +56,7 @@ def single_logloss(true_df, pred_df):
 if __name__ == '__main__':
     path = os.getcwd() + '/updata/'
     print(path)
-    true = pd.read_csv(path+'/b/updata_gbm_nan_change4_error3_b1.csv', index_col=0, delimiter=',', header=None)
+    true = pd.read_csv(path+'/b/updata_gbm_nan_change4_error3_b2.csv', index_col=0, delimiter=',', header=None)
     # pred = pd.read_csv(path+'updata_gbm_nan_error32.csv', index_col=0, delimiter=',', header=None)
-    pred = pd.read_csv(path + '/b/updata_gbm_part_change4_error_b1.csv', index_col=0, delimiter=',', header=None)
+    pred = pd.read_csv(path + 'submit_20180508_135858.csv', index_col=0, delimiter=',', header=None)
     calc_logloss(true, pred)
